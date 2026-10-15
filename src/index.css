@@ -1,0 +1,214 @@
+
+/* Fonts are self-hosted so the app works offline and behind any CSP. */
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/vazirmatn/400.css';
+@import '@fontsource/vazirmatn/500.css';
+@import '@fontsource/vazirmatn/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens */
+
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: 11 13 16;
+  --surface: 18 21 26;
+  --surface-2: 24 28 34;
+  --border: 34 39 46;
+
+  --fg: 234 238 244;
+  --fg-muted: 156 163 175;
+  --fg-subtle: 107 114 128;
+
+  --accent: 190 242 100;
+  --accent-fg: 15 23 12;
+
+  --danger: 248 113 113;
+  --success: 74 222 128;
+  --warning: 251 191 36;
+
+  --card: var(--surface);
+  --muted: var(--fg-muted);
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: 247 248 250;
+  --surface: 255 255 255;
+  --surface-2: 243 244 247;
+  --border: 226 229 234;
+
+  --fg: 17 20 24;
+  --fg-muted: 75 85 99;
+  --fg-subtle: 130 138 150;
+
+  --accent: 132 204 22;
+  --accent-fg: 15 23 12;
+
+  --danger: 220 38 38;
+  --success: 22 163 74;
+  --warning: 202 138 4;
+
+  --card: var(--surface);
+  --muted: var(--fg-muted);
+}
+
+/* Base layout */
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+html {
+  background: rgb(var(--bg));
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: 'Inter', sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+html[dir='rtl'] body {
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+/* Form controls */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+input,
+textarea,
+select {
+  color: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgb(var(--fg-subtle));
+  opacity: 1;
+}
+
+input[type='number'] {
+  font-variant-numeric: tabular-nums;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  accent-color: rgb(var(--accent));
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+/* Numeric values */
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Scrollbars */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--border)) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border: 3px solid transparent;
+  border-radius: 9999px;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--fg-subtle));
+  background-clip: content-box;
+}
+
+/* Selection */
+
+::selection {
+  color: rgb(var(--accent-fg));
+  background: rgb(var(--accent));
+}
+
+/* Smooth theme changes for common surfaces */
+
+button,
+input,
+textarea,
+select,
+a {
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  *::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+/* Accessibility: respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
